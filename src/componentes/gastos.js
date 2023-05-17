@@ -14,6 +14,7 @@ import { Toaster, toast } from 'react-hot-toast'
 
 
 import Compressor from 'compressorjs';
+import { Link } from 'react-router-dom';
 
 
 function Gastos() {
@@ -1554,7 +1555,8 @@ function Gastos() {
                                         </Modal>
                                     </div>
                                 </div>
-                                <div className='footer-pague'> @COPYRIGHT todos los derechos reservados <spam className='spam-footer'>Empresa Contructora BSCH 2023</spam></div>
+                                <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
+                                <spam className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</spam></Link> </div>
                             </div>
                         </div>
                     </div>

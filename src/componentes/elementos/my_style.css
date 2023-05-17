@@ -549,7 +549,7 @@
     color: #4a6a6e;
 
 
-color: rgb(114, 114, 114);
+    color: rgb(114, 114, 114);
 
     height: 27px;
     width: 28px;
@@ -1220,9 +1220,9 @@ td {
         height: auto;
         z-index: 1000;
         padding-bottom: 10px;
-    
+
     }
-    
+
     .light-box img {
         width: 95%;
         max-height: 60vh;
@@ -2163,6 +2163,7 @@ td {
 }
 
 .btn-asignar-tabla {
+    width: auto;
     height: 28px;
     font-size: 14px;
     display: flex;
@@ -2189,6 +2190,7 @@ a:active {
 
 .btn-icon-asignar {
     margin-left: 8px;
+
 }
 
 .btn-icon-eliminar {

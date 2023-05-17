@@ -128,10 +128,10 @@ function UsuarioAsignacion() {
                                                 <Table className="table  table-sm">
                                                     <thead>
                                                         <tr >
-                                                            <th className="col-1 ">C.I.</th>
-                                                            <th className="col-2  ">Nombre</th>
-                                                            <th className="col-1  ">Usuario</th>
-                                                            <th className="col-1  ">Cel./Tel.</th>
+                                                            <th className="col-2 ">C.I.</th>
+                                                            <th className="col-3  ">Nombre</th>
+                                                            <th className="col-2  ">Usuario</th>
+                                                            <th className="col-2  ">Cel./Tel.</th>
                                                             <th className="col-1 "></th>
                                                         </tr>
                                                     </thead>
@@ -144,14 +144,14 @@ function UsuarioAsignacion() {
                                                                     localStorage.setItem('empleado', u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2);
                                                                     localStorage.setItem('idEmpleado', u.id)
                                                                 }}>
-                                                                    <td className="col-1 ">{u.ci}</td>
-                                                                    <td className="col-2 ">{u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2}</td>
+                                                                    <td className="col-2 ">{u.ci}</td>
+                                                                    <td className="col-3 ">{u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2}</td>
 
-                                                                    <td className="col-1  ">{u.username}</td>
-                                                                    <td className="col-1  ">{u.celular}</td>
+                                                                    <td className="col-2  ">{u.username}</td>
+                                                                    <td className="col-2  ">{u.celular}</td>
                                                                     <td className="col-1 largTable">
                                                                         <Link to='/asignaciones' className="btn-asignar-tabla">
-                                                                            Asignar<FontAwesomeIcon className='btn-icon-asignar' icon={faArrowRight}></FontAwesomeIcon>
+                                                                            Asignar $<FontAwesomeIcon className='btn-icon-asignar' icon={faArrowRight}></FontAwesomeIcon>
                                                                         </Link>
                                                                     </td>
                                                                 </tr> : null
@@ -178,7 +178,8 @@ function UsuarioAsignacion() {
                                     </div>
 
                                 </div>
-                                <div className='footer-pague'> @COPYRIGHT todos los derechos reservados <spam className='spam-footer'>Empresa Contructora BSCH 2023</spam></div>
+                                <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
+                                <spam className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</spam></Link> </div>
 
                             </div>
                         </div>

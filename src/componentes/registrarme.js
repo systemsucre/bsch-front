@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { ComponenteInputUser, Select1 } from './elementos/input';  // componente input que incluye algunas de las funcionalidades como, setInput, validaciones cambio de estados
+import React from 'react';
+import { Link } from 'react-router-dom'
+import { ComponenteInputUser, } from './elementos/input';  // componente input que incluye algunas de las funcionalidades como, setInput, validaciones cambio de estados
 import { useState } from "react";
 import { URL, INPUT } from '../Auth/config';
 import axios from 'axios';
 import { Button, Modal, ModalBody } from 'reactstrap';
 import md5 from 'md5'
 import { Toaster, toast } from 'react-hot-toast'
-import { faArrowRight, faCaretLeft, faEdit, faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -63,7 +64,7 @@ function Registrame() {
     return (
         <>
             <div className="hold-transition login-page">
-                <div className="login-box">
+                <div className="login-box mb-5" >
                     <div className="card card-outline card-primary">
                         <form className='p-2' >
                             <small className='text-center'>REGISTRARME</small>
@@ -151,6 +152,7 @@ function Registrame() {
                         </form>
                     </div>
                 </div>
+
             </div>
 
 
@@ -181,6 +183,8 @@ function Registrame() {
                 </div>
             </Modal>
             <Toaster position='top-center' />
+            {/* <div className='footer-pagueR'> @COPYRIGHT  <Link className='ml-5' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
+                <spam className='spam-footerR'> Desarrollador: Gustavo Aguilar Torres</spam></Link> </div> */}
         </>
 
 

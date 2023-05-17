@@ -367,7 +367,8 @@ function Informaciones() {
                                         <Toaster position='top-right' />
 
                                     </div>
-                                    <div className='footer-pague'> @COPYRIGHT todos los derechos reservados <spam className='spam-footer'>Empresa Contructora BSCH 2023</spam></div>
+                                    <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
+                                <spam className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</spam></Link> </div>
 
                                 </div>
 
