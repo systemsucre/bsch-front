@@ -139,7 +139,7 @@ function UsuarioAsignacion() {
 
                                                         {lista.map((u) => (
 
-                                                            u.validar ?
+                                                            u.validar && (localStorage.getItem('username') != u.username) ?
                                                                 <tr key={u.id} className='item' onClick={() => {
                                                                     localStorage.setItem('empleado', u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2);
                                                                     localStorage.setItem('idEmpleado', u.id)
@@ -151,7 +151,7 @@ function UsuarioAsignacion() {
                                                                     <td className="col-2  ">{u.celular}</td>
                                                                     <td className="col-1 largTable">
                                                                         <Link to='/asignaciones' className="btn-asignar-tabla">
-                                                                            Asignar $<FontAwesomeIcon className='btn-icon-asignar' icon={faArrowRight}></FontAwesomeIcon>
+                                                                            Asignar<FontAwesomeIcon className='btn-icon-asignar' icon={faArrowRight}></FontAwesomeIcon>
                                                                         </Link>
                                                                     </td>
                                                                 </tr> : null

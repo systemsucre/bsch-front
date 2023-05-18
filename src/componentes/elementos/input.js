@@ -179,7 +179,7 @@ const Select1 = ({ estado, cambiarEstado, Name, ExpresionRegular, lista, nombre 
 
 
 
-const InputUsuario = ({ estado, cambiarEstado, tipo, name, placeholder, ExpresionRegular, span }) => {
+const InputUsuario = ({ estado, cambiarEstado, tipo, name, placeholder, ExpresionRegular, eventoBoton, span }) => {
 
     const [mensaje, setMensaje] = useState(null)
 
@@ -213,6 +213,12 @@ const InputUsuario = ({ estado, cambiarEstado, tipo, name, placeholder, Expresio
     else
         tipoinput = 'text'
 
+    const handleKeyPress = (e) => {
+        if (e.keyCode === 13) {
+            eventoBoton()
+        }
+    }
+
     return (
         <div>
             <div className="input-group mb-0" style={{ position: 'relative' }}>
@@ -226,6 +232,7 @@ const InputUsuario = ({ estado, cambiarEstado, tipo, name, placeholder, Expresio
                     onChange={onChange}
                     onKeyUp={validacion} //se ejecuta cuando dejamos de presionar la tecla
                     onBlur={validacion}  //si presionamos fuera del input
+                    onKeyDown={handleKeyPress}
                     valido={estado.valido}
                     style={{ fontSize: '12px', height: '20px' }}
                 />
@@ -1821,7 +1828,7 @@ const ComponenteInputBuscar_ = ({ estado, cambiarEstado, name, ExpresionRegular,
                 type='text'
                 value={estado.campo || ''}
                 id={'idBuscador'}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm "
                 name={name}
                 placeholder={placeholder}
                 onKeyUp={validacion} //se ejecuta cuando dejamos de presionar la tecla

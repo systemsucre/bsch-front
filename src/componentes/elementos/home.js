@@ -99,7 +99,7 @@ function Home() {
                                             <li key="uniqueId1s0sss" className="nav-item">
                                                 <Link to='/asignacion-usuario' className="nav-link">
                                                     <FontAwesomeIcon icon={faDollarSign} className='nav-icon'></FontAwesomeIcon>
-                                                    <p className="ml-2">Asignacion</p>
+                                                    <p className="ml-2">Asignación</p>
                                                 </Link>
                                             </li>
                                             <li key="uniqueId7s" className="nav-item ">

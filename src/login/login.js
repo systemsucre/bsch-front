@@ -197,7 +197,7 @@ function Formulario() {
               <div className=" card-body">
                 <p className="login-box-msg">inicie session</p>
                 <div className="col-12 mb-3">
-                  <InputUsuario
+                  <InputUsuario 
                     estado={usuario}
                     cambiarEstado={setUsuario}
                     tipo="text"
@@ -205,6 +205,7 @@ function Formulario() {
                     placeholder="Usuario"
                     ExpresionRegular={expresiones.usuario}
                     span="fas fa-envelope"
+                    eventoBoton={iniciarSesion}
                   />
                 </div>
                 <div className="col-12 mb-3">
@@ -216,6 +217,7 @@ function Formulario() {
                     placeholder="Contraseña"
                     ExpresionRegular={expresiones.password}
                     span="fas fa-lock"
+                    eventoBoton={iniciarSesion}
                   />
                 </div>
                 <div className=" col-12 ">
@@ -239,11 +241,18 @@ function Formulario() {
                 <br></br>
                 {empresa.length > 0 &&
                   <p className="text-left">   
+                    <div className="info-empresa">{'Desarrollador: Gustavo Aguilar T'}</div>
+                    <div className="info-empresa"> <i className="fas fa-phone mr-1"></i>{'Contactos : 71166513' }</div>
+                    <div className="info-empresa"><FontAwesomeIcon icon={faMailBulk} className='mr-2'></FontAwesomeIcon>{'gustavoaguilares@gmail.com'}</div>
+                  </p>
+                }
+                {/* {empresa.length > 0 &&
+                  <p className="text-left">   
                     <div className="info-empresa">{empresa[0].nombre}</div>
                     <div className="info-empresa"> <i className="fas fa-phone mr-1"></i>{'Contactos : ' + empresa[0].telefono}</div>
                     <div className="info-empresa"><FontAwesomeIcon icon={faMailBulk}></FontAwesomeIcon>{empresa[0].correo}</div>
                   </p>
-                }
+                } */}
               </div>
             </div>
           </div>

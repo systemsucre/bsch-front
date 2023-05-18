@@ -768,8 +768,8 @@ function Reportes() {
                                                     </div>
                                                 </div>
                                                 <div className='contenedor'>
-                                                    {seccion == 1 && <div className='nombre-reporte' style={{color:'rgb(114, 114, 114)', fontWeight: 'bold' ,fontSize :'16px'}}>{'MODALIDA DE REPORTE [POR PROYECTO] (PROYECTO ' + nombreProyecto + ')'}</div>}
-                                                    {seccion == 2 && <div className='nombre-reporte' style={{color:'rgb(114, 114, 114)', fontWeight: 'bold' ,fontSize :'16px'}}>{'MODALIDAD DE REPORTE [POR PERSONAL] (PERSONAL ' + nombrePersonal + ')'}</div>}
+                                                    {seccion == 1 && <div className='nombre-reporte' style={{color:'rgb(114, 114, 114)', fontWeight: 'bold' ,fontSize :'14px'}}>{'MODALIDA DE REPORTE [POR PROYECTO] (PROYECTO ' + nombreProyecto + ')'}</div>}
+                                                    {seccion == 2 && <div className='nombre-reporte' style={{color:'rgb(114, 114, 114)', fontWeight: 'bold' ,fontSize :'14px'}}>{'MODALIDAD DE REPORTE [POR PERSONAL] (PERSONAL ' + nombrePersonal + ')'}</div>}
                                                     {seccion == 3 &&
                                                         <>
                                                             <div className='nombre-reporte' style={{color:'rgb(114, 114, 114)', fontWeight: 'bold' ,fontSize :'16px'}}>{'MODALIDAD DE REPORTE [POR ESTADO DE ASIGNACION] '}</div>
@@ -795,23 +795,23 @@ function Reportes() {
                                                     <div className='mt-3' style={{ borderBottom: "3px solid rgba(255, 99, 132, 0.5)" }}>
                                                         <div className='row' >
                                                             <div className='smalldiv col-1' style={{ background: 'rgba(255, 99, 132, 0.5)' }}></div>
-                                                            <label className='col-10 labels float-left'>Total Asignado</label>
-                                                            <label className='col-1 labels float-left'>{total?'Bs. ' + total:' 0 Bs.'}</label>
+                                                            <label className='col-8 labels float-left'>Total Asignado</label>
+                                                            <label className='col-2 labels float-left'>{total?'Bs. ' + total:' 0 Bs.'}</label>
                                                         </div>
                                                     </div>
 
                                                     <div className=' mt-4' style={{ borderBottom: "3px solid rgba(53, 162, 235, 0.5)" }}>
                                                         <div className='row' >
                                                             <div className='smalldiv col-1' style={{ background: 'rgba(53, 162, 235, 0.5)' }}></div>
-                                                            <label className='col-10 labels float-left'>Monto gastado</label>
-                                                            <label className='col-1 labels float-left'>{gastado?'Bs. ' + gastado:' 0 Bs.'}</label>
+                                                            <label className='col-8 labels float-left'>Monto gastado</label>
+                                                            <label className='col-2 labels float-left'>{gastado?'Bs. ' + gastado:' 0 Bs.'}</label>
                                                         </div>
                                                     </div>
                                                     <div className='mt-3' style={{ borderBottom: "3px solid rgba(255, 99, 132, 0.5)" }}>
                                                         <div className='row' >
                                                             <div className='smalldiv col-1' style={{ background: 'rgba(255, 99, 132, 0.5)' }}></div>
-                                                            <label className='col-10 labels float-left'>Saldo caja</label>
-                                                            <label className='col-1 labels float-left'>{'Bs. ' + (total - gastado)}</label>
+                                                            <label className='col-8 labels float-left'>Saldo caja</label>
+                                                            <label className='col-2 labels float-left'>{'Bs. ' + (total - gastado)}</label>
                                                         </div>
                                                     </div>
                                                     <div className="row botonModal pt-3">
