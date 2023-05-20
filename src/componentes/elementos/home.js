@@ -32,10 +32,10 @@ function Home() {
 
                 </nav>
                 <aside className="main-sidebar sidebar-dark-primary " style={{ height: '100%' }}>
-                    {tam < 700 &&
+                    {tam < 992 &&
                         <p className="nav-link mt-2" style={{ color: 'white' }} data-widget="pushmenu" role="button"> <i className="fas fa-bars"></i> </p>
                     }
-                    {(parseInt(localStorage.getItem('numRol')) === 1) && tam < 700 &&
+                    {(parseInt(localStorage.getItem('numRol')) === 1) && tam < 992 &&
                         <div data-widget="pushmenu" role="button">
 
                             <Link to='/informacion' className="nav-link" > <div className="brand-link pb-0" >
@@ -52,7 +52,7 @@ function Home() {
                             </div>
                             </Link>
                         </div>}
-                    {(parseInt(localStorage.getItem('numRol')) === 1) && tam >= 700 &&
+                    {(parseInt(localStorage.getItem('numRol')) === 1) && tam >= 992 &&
                         <Link to='/informacion' className="nav-link" > <div className="brand-link pb-0" >
                             <div className="text-center">
                                 <img src="dist/img/empresa.png" alt="perfil" className="img-circle elevation-4" style={{ width: '50px', height: '50px' }} />
@@ -67,7 +67,7 @@ function Home() {
                         </div>
                         </Link>
                     }
-                    {parseInt(localStorage.getItem('numRol')) === 2 && tam < 700 && <div className="brand-link pb-0" data-widget="pushmenu" role="button" >
+                    {parseInt(localStorage.getItem('numRol')) === 2 && tam < 992 && <div className="brand-link pb-0" data-widget="pushmenu" role="button" >
                         <div className="text-center">
                             <img src="dist/img/empresa.png" alt="perfil" className="img-circle elevation-4" style={{ width: '50px', height: '50px' }} />
                         </div>
@@ -77,7 +77,7 @@ function Home() {
                             <Link to={'/miPerfil'}>  <p className="brand-text font-weight-light" style={{ fontSize: '14px', color: 'white' }}>Gestionar mi Perfil</p></Link>
                         </div>
                     </div>}
-                    {parseInt(localStorage.getItem('numRol')) === 2 && tam >= 700 && <div className="brand-link pb-0" >
+                    {parseInt(localStorage.getItem('numRol')) === 2 && tam >= 992 && <div className="brand-link pb-0" >
                         <div className="text-center">
                             <img src="dist/img/empresa.png" alt="perfil" className="img-circle elevation-4" style={{ width: '50px', height: '50px' }} />
                         </div>
@@ -93,7 +93,7 @@ function Home() {
 
                             <div>
                                 <ul className="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-accordion="false">
-                                    {(parseInt(localStorage.getItem('numRol')) === 1) && tam < 700 && <>
+                                    {(parseInt(localStorage.getItem('numRol')) === 1) && tam < 992 && <>
 
                                         < div data-widget="pushmenu" role="button">
                                             <li key="uniqueId1s0sss" className="nav-item">
@@ -146,7 +146,7 @@ function Home() {
                                     </>
                                     }
 
-                                    {(parseInt(localStorage.getItem('numRol')) === 1) && tam >= 700 && <>
+                                    {(parseInt(localStorage.getItem('numRol')) === 1) && tam >= 992 && <>
 
                                         <li key="uniqueId1s0sss1" className="nav-item">
                                             <Link to='/asignacion-usuario' className="nav-link">
@@ -198,7 +198,7 @@ function Home() {
                                     }
 
 
-                                    {parseInt(localStorage.getItem('numRol')) === 2 && tam < 700 && < div data-widget="pushmenu" role="button">
+                                    {parseInt(localStorage.getItem('numRol')) === 2 && tam < 992 && < div data-widget="pushmenu" role="button">
                                         <li key="uniqueId101" className="nav-item">
                                             <Link to='/gastos' className="nav-link">
                                                 <FontAwesomeIcon icon={faDollarSign} className='nav-icon'></FontAwesomeIcon>

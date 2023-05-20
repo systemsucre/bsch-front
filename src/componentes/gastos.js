@@ -967,7 +967,7 @@ function Gastos() {
                                                             <div className='titleDetalle' >
                                                                 Fechas
                                                             </div>
-                                                            <p className='textoDetalle'>{'FECHA ASIGNACION :  ' + asignacion[0][0].fecha}</p>
+                                                            <p className='textoDetalle'>{'FECHA ASIGNACIÓN :  ' + asignacion[0][0].fecha}</p>
                                                             <p className='textoDetalle'><spam>FECHA RENDICION :</spam>{asignacion[0][0].fecharendicion ? '      ' + asignacion[0][0].fecharendicion : 'Pendiente'}</p>
                                                             <p className='textoDetalle'><spam>FECHA APROBACION :</spam>{asignacion[0][0].fechaaprobacion ? '       ' + asignacion[0][0].fechaaprobacion : 'Pendiente'}</p>
                                                         </div>
