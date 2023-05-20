@@ -239,20 +239,20 @@ function Formulario() {
                   <Link to="/registrame" className="text-center">Solicite su cuenta ahora! </Link>
                 </p>
                 <br></br>
-                {empresa.length > 0 &&
+                {/* {empresa.length > 0 &&
                   <p className="text-left">   
                     <div className="info-empresa">{'Desarrollador: Gustavo Aguilar T'}</div>
                     <div className="info-empresa"> <i className="fas fa-phone mr-1"></i>{'Contactos : 71166513' }</div>
                     <div className="info-empresa"><FontAwesomeIcon icon={faMailBulk} className='mr-2'></FontAwesomeIcon>{'gustavoaguilares@gmail.com'}</div>
                   </p>
-                }
-                {/* {empresa.length > 0 &&
+                } */}
+                {empresa.length > 0 &&
                   <p className="text-left">   
                     <div className="info-empresa">{empresa[0].nombre}</div>
                     <div className="info-empresa"> <i className="fas fa-phone mr-1"></i>{'Contactos : ' + empresa[0].telefono}</div>
                     <div className="info-empresa"><FontAwesomeIcon icon={faMailBulk}></FontAwesomeIcon>{empresa[0].correo}</div>
                   </p>
-                } */}
+                }
               </div>
             </div>
           </div>

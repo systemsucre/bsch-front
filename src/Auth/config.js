@@ -1,6 +1,6 @@
 const DB_DATABASE = process.env.DB_DATABASE || 'sp';
-// const URL = 'http://localhost:3001'
- const URL = 'https://spclaver.alwaysdata.net'
+const URL = 'http://localhost:3001'
+//  const URL = 'https://spclaver.alwaysdata.net'
 
 const TIEMPO_INACTIVO = 60 // MINUTOS DE TOLERANCIA ANTESDE QUE EL USUARIO VUELVA A INTERACTUAR CON EL SISTEMA YA SEA MEDIANTE MUOSE O TECLADO
 const INPUT = {
