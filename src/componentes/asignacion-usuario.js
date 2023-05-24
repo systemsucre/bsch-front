@@ -42,7 +42,7 @@ function UsuarioAsignacion() {
 
         const listarUsuarios = async () => {
             try {
-                axios.post(URL + '/usuario/all').then(json => {
+                axios.post(URL + '/usuario/listarasignacion').then(json => {
                     if (json.data.ok)
                         setLista(json.data.data)
                     else toast.error(json.data.msg)
@@ -55,7 +55,7 @@ function UsuarioAsignacion() {
 
         const buscar = () => {
             if (inputBuscar.valido === 'true') {
-                axios.post(URL + '/usuario/buscar', { dato: inputBuscar.campo }).then(json => {
+                axios.post(URL + '/usuario/buscarAsignacion', { dato: inputBuscar.campo }).then(json => {
                     if (json.data.ok) {
                         setLista(json.data.data)
 
@@ -66,7 +66,7 @@ function UsuarioAsignacion() {
 
 
         const siguiente = () => {
-            let dir = URL + '/usuario/next'
+            let dir = URL + '/usuario/nextListarAsignacion'
             if (lista.length > 0) {
                 const last = lista[lista.length - 1].id
                 // console.log(last, lista)
@@ -81,7 +81,7 @@ function UsuarioAsignacion() {
         }
 
         const anterior = () => {
-            let dir = URL + '/usuario/anterior'
+            let dir = URL + '/usuario/anteriorListarAsignacion'
             if (lista.length > 0) {
                 const last = lista[0].id
                 axios.post(dir, { id: last }).then(json => {
@@ -98,10 +98,10 @@ function UsuarioAsignacion() {
         return (
             <div>
 
-                <div className="hold-transition sidebar-mini" >
-                    <div className="wrapper">
+                <div className="hold-transition sidebar-mini">
+                    <div className="wrapper" >
                         <Home />
-                        <div className="content-wrapper" >
+                        <div className="content-wrapper">
                             <div className="content">
                                 <div className="container-fluid pt-1">
                                     <div className='tituloPaginas'>
@@ -179,7 +179,7 @@ function UsuarioAsignacion() {
 
                                 </div>
                                 <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
-                                <spam className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</spam></Link> </div>
+                                <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
 
                             </div>
                         </div>

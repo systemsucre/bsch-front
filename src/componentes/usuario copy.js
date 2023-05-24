@@ -443,11 +443,11 @@ function Usuario() {
                                                             Datos Generales
                                                         </div>
                                                         <p className='textoDetalle'>{'Usuario : ' + usuario[0].nombre + ' ' + usuario[0].apellido1 + ' ' + usuario[0].apellido2}</p>
-                                                        <p className='textoDetalle'><span>Sueldo</span>{usuario[0].sueldo ? '  :  ' + usuario[0].sueldo + ' Bs.' : 'sin validar'}</p>
+                                                        <p className='textoDetalle'><span>Sueldo</span>{usuario[0].sueldo ? +'  : '+ usuario[0].sueldo + ' Bs.' : ' : Falta habilitar el usuario'}</p>
                                                         <p className='textoDetalle'>{'celular : ' + usuario[0].celular}</p>
                                                         <p className='textoDetalle'>{'usuario : ' + usuario[0].username}</p>
                                                         {usuario[0].validar ? null : <div className='titloFormulario' style={{ color: '#bb2124' }}>
-                                                            USUARIO SIN HABILITAR
+                                                            USUARIO NO HABILITADO
                                                         </div>}
                                                         {eliminado === false &&  <div className='contenedor-float'>
                                                             <Button className='btn-eliminar-float ' onClick={() => { eliminar(usuario[0].id) }}><FontAwesomeIcon className='btn-eliminar-eliminar' icon={faTrashAlt}></FontAwesomeIcon> Eliminar</Button>
@@ -465,7 +465,7 @@ function Usuario() {
                                                     <div>
                                                         <div className='groupInput'>
                                                             <div className='titleDetalle' >
-                                                                Privilegios
+                                                                Privilegio
                                                             </div>
                                                             <p className='textoDetalle'>{'Rol(es)'}</p>
 
@@ -483,7 +483,7 @@ function Usuario() {
                                                             <div className='titleDetalle' >
                                                                 Otra información
                                                             </div>
-                                                            <p className='textoDetalle'><span>Ultima interaccion por : </span>{usuario[0].creador ? usuario[0].creador : 'sin validar'}</p>
+                                                            <p className='textoDetalle'><span>Ultima interaccion por : </span>{usuario[0].creador ? usuario[0].creador : ' Falta habilitar el usuario'}</p>
                                                             <p className='textoDetalle'><span>Registro Creado en  </span>{usuario[0].fechacreacion ? '  :  ' + usuario[0].fechacreacion : 'Sin fecha'}</p>
                                                             <p className='textoDetalle'><span>ultima actualizacion  : </span>{usuario[0].fechamodificado ? usuario[0].fechamodificado : 'Todavia no se ha actualizado'}</p>
                                                         </div>

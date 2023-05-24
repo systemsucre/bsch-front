@@ -179,12 +179,12 @@ function Registrame() {
                         <FontAwesomeIcon className='btn-icon-eliminar' icon={faWindowClose}></FontAwesomeIcon>Cerrar ventana </Button>
 
                     <Button className='btn-nuevo col-auto' onClick={() => insertar()}>
-                        <FontAwesomeIcon className='btn-icon-nuevo' icon={faSave}></FontAwesomeIcon>Registrarme </Button>
+                        <FontAwesomeIcon className='btn-icon-nuevo' icon={faSave }></FontAwesomeIcon>Registrarme </Button>
                 </div>
             </Modal>
             <Toaster position='top-center' />
-            {/* <div className='footer-pagueR'> @COPYRIGHT  <Link className='ml-5' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
-                <spam className='spam-footerR'> Desarrollador: Gustavo Aguilar Torres</spam></Link> </div> */}
+            <div className='footer-pagueR'> @COPYRIGHT  <Link className='ml-5' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
+                <span className='spam-footerR'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
         </>
 
 

@@ -438,6 +438,7 @@ function Gastos() {
                             setGasto(json.data.data)
                             listarGastos(idAsignacion.campo)
                             setModalGastos(true)
+                            setModalInsertar(false)
                             empty()
                             toast.success(json.data.msg)
                         }
@@ -538,6 +539,7 @@ function Gastos() {
                             setGasto(json.data.data)
                             toast.success(json.data.msg)
                             setModalGastos(true)
+                            setModalEditar(false)
                             listaGasto(idAsignacion.campo)
                             empty()
                         }
@@ -849,7 +851,7 @@ function Gastos() {
                                                             {
                                                                 montoGastado < nombreVentanaMOnto ?
 
-                                                                    <p className='textoDetalle'><spam> MONTO GASTADO</spam>{montoGastado ? ' Bs. ' + montoGastado : ' : 0 Bs.'}</p> :
+                                                                    <p className='textoDetalle'><span> MONTO GASTADO</span>{montoGastado ? ' Bs. ' + montoGastado : ' : 0 Bs.'}</p> :
                                                                     <p className='textoDetalle'>{'MONTO GASTADO : ' + montoGastado + ' Bs.'}
                                                                         <span style={{ color: 'red', fontSize: '12px' }}> El gasto excedió a monto asignado</span></p>
                                                             }
@@ -968,8 +970,8 @@ function Gastos() {
                                                                 Fechas
                                                             </div>
                                                             <p className='textoDetalle'>{'FECHA ASIGNACIÓN :  ' + asignacion[0][0].fecha}</p>
-                                                            <p className='textoDetalle'><spam>FECHA RENDICION :</spam>{asignacion[0][0].fecharendicion ? '      ' + asignacion[0][0].fecharendicion : 'Pendiente'}</p>
-                                                            <p className='textoDetalle'><spam>FECHA APROBACION :</spam>{asignacion[0][0].fechaaprobacion ? '       ' + asignacion[0][0].fechaaprobacion : 'Pendiente'}</p>
+                                                            <p className='textoDetalle'><span>FECHA RENDICION :</span>{asignacion[0][0].fecharendicion ? '      ' + asignacion[0][0].fecharendicion : 'Pendiente'}</p>
+                                                            <p className='textoDetalle'><span>FECHA APROBACION :</span>{asignacion[0][0].fechaaprobacion ? '       ' + asignacion[0][0].fechaaprobacion : 'Pendiente'}</p>
                                                         </div>
                                                         <div className='groupInput'>
                                                             <div className='titleDetalle' >
@@ -1556,7 +1558,7 @@ function Gastos() {
                                     </div>
                                 </div>
                                 <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
-                                <spam className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</spam></Link> </div>
+                                <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
                             </div>
                         </div>
                     </div>

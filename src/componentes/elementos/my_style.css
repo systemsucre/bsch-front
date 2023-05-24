@@ -1033,7 +1033,7 @@ td {
 
 .titloFormulario {
     background: rgb(249, 249, 249);
-    font-family: sans-serif;
+    font-style: italic;
     padding-left: 10px;
     font-size: 16px;
     padding: 5px;
@@ -1937,7 +1937,7 @@ td {
     font-size: 12px;
 }
 
-.titleDetalle {
+.titleDetalle {  
     font-size: 11px;
     color: rgb(143, 143, 143);
     margin: 0;
@@ -1945,6 +1945,8 @@ td {
 
 .tituloPaginas {
     font-size: 20px;
+    font-style: italic;
+
     /* height: 50px; */
     min-height: 50px;
     color: rgb(132, 132, 132);

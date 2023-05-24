@@ -247,11 +247,11 @@ function Formulario() {
                   </p>
                 } */}
                 {empresa.length > 0 &&
-                  <p className="text-left">   
+                  <div className="text-left">   
                     <div className="info-empresa">{empresa[0].nombre}</div>
                     <div className="info-empresa"> <i className="fas fa-phone mr-1"></i>{'Contactos : ' + empresa[0].telefono}</div>
                     <div className="info-empresa"><FontAwesomeIcon icon={faMailBulk}></FontAwesomeIcon>{empresa[0].correo}</div>
-                  </p>
+                  </div>
                 }
               </div>
             </div>

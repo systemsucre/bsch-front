@@ -11168,7 +11168,7 @@ body,
 }
 
 .wrapper {
-  position: relative;
+  /* position: relative; */
 }
 
 .wrapper .content-wrapper {

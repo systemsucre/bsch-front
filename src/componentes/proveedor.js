@@ -260,7 +260,7 @@ function Proveedor() {
                             <div className="content">
                                 <div className="container-fluid pt-1">
                                     <div className='col-12 tituloPaginas'>
-                                        Proveedores <spam className='text-eliminado'>{eliminado === false ? null : '[Elementos eliminados]'}</spam>
+                                        Proveedores <span className='text-eliminado'>{eliminado === false ? null : '[Elementos eliminados]'}</span>
                                     </div >
                                     <div style={{ background: 'white' }}>
                                         <div className='contenedor-cabecera'>
@@ -508,7 +508,7 @@ function Proveedor() {
                                 </div>
 
                                 <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
-                                <spam className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</spam></Link> </div>
+                                <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
                             </div>
                         </div>
                     </div >

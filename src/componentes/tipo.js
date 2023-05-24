@@ -252,7 +252,7 @@ function Tipo() {
                             <div className="content">
                                 <div className="container-fluid pt-1">
                                     <div className='col-12 tituloPaginas'>
-                                        Tipo de registro <spam className='text-eliminado'>{eliminado === false ? null : '[Elementos eliminados]'}</spam>
+                                        Tipo de registro <span className='text-eliminado'>{eliminado === false ? null : '[Elementos eliminados]'}</span>
                                     </div>
                                     <div style={{ background: 'white' }}>
                                         <div className="contenedor-cabecera">
@@ -424,7 +424,7 @@ function Tipo() {
                                     </Modal>
                                 </div>
                                 <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
-                                <spam className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</spam></Link> </div>
+                                <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
 
                             </div>
                         </div>
