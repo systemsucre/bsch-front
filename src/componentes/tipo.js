@@ -28,6 +28,8 @@ function Tipo() {
     const [descripcion, setDescripcion] = useState({ campo: null, valido: null })
     const [inputBuscar, setInputBuscar] = useState({ campo: null, valido: null })
     const [eliminado, seteliminado] = useState(false)
+    const [enviado, setEnviado] = useState(0)
+
 
 
     try {
@@ -76,6 +78,7 @@ function Tipo() {
             setId({ campo: null, valido: null })
             setTipo({ campo: null, valido: null })
             setDescripcion({ campo: null, valido: null })
+            setEnviado(0)
         }
 
         const abrirModalInsetar = () => {
@@ -92,7 +95,8 @@ function Tipo() {
 
         const insertar = async () => {
 
-            if (tipo.valido === 'true' && descripcion.valido === 'true') {
+            if (tipo.valido === 'true' && descripcion.valido === 'true' && enviado === 0) {
+                setEnviado(1)
                 let today = new Date()
                 let fecha = today.toISOString().split('T')[0]
                 let hora = new Date().toLocaleTimeString().split(':')[0]
@@ -110,9 +114,7 @@ function Tipo() {
                         vaciarDatos()
                         setModalInsertar(false)
                         toast.success(json.data.msg)
-                    }
-                    else
-                        toast.error(json.data.msg)
+                    }else {toast.error(json.data.msg);setEnviado(0)}
                 })
             } else {
                 toast.error('Complete los campos')
@@ -423,7 +425,7 @@ function Tipo() {
                                         </div>
                                     </Modal>
                                 </div>
-                                <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
+                                <div className='footer-pague'> ©EMPRESA CONSTRUCTORA BSCH <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
                                 <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
 
                             </div>

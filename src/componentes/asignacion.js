@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Table, Button, Modal, ModalBody,  } from 'reactstrap';
+import { Table, Button, Modal, ModalBody, } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft, faArrowLeft, faArrowRight, faCheckCircle, faDollarSign, faEdit, faImage, faList, faPlusCircle, faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
@@ -62,6 +62,8 @@ function Asignacion() {
     const [ventanaProyecto, setVentanaProyecto] = useState(null);
     const [descripcionGasto, setDescripcionGasto] = useState(null);
     const [nombreVentana, setNombreVentana] = useState('GASTOS');
+    const [enviado, setEnviado] = useState(0);
+
 
 
 
@@ -151,11 +153,13 @@ function Asignacion() {
             setComprovante({ campo: null, valido: null })
             setModalInsertar(false)
             setModalEditar(false)
+            setEnviado(0)
         }
 
         const insert = async () => {
             if (fecha.valido === 'true' && idProyecto.valido === 'true' &&
-                monto.valido === 'true' && tipo.valido === 'true' && comprobante.valido === 'true' && descripcion.valido === 'true') {
+                monto.valido === 'true' && tipo.valido === 'true' && comprobante.valido === 'true' && descripcion.valido === 'true' && enviado === 0) {
+                setEnviado(1)
                 axios.post(URL + '/asignacion/insert', {
                     idpersonal: usuarioLocal,
                     idproyecto: idProyecto.campo,
@@ -174,8 +178,7 @@ function Asignacion() {
                         toast.success(json.data.msg)
                         listarAsignacion()
                     }
-                    else
-                        toast.error(json.data.msg)
+                    else{toast.error(json.data.msg);setEnviado(0)}
                 })
             } else {
                 toast.error('Complete los campos')
@@ -461,7 +464,7 @@ function Asignacion() {
                                                 </div>
                                                 <div className="table table-responsive custom">
 
-                                                    <Table className="table table-sm" >
+                                                    <Table className="table table-sm tabla-movil" >
                                                         <thead>
                                                             <tr >
                                                                 <th className="col-1">Fecha</th>
@@ -522,7 +525,7 @@ function Asignacion() {
                                     }
                                     {
                                         ventana === 2 &&
-                                        <div style={{background:'white'}}>
+                                        <div style={{ background: 'white' }}>
                                             <div className='nombre-reporte  m-3' style={{ color: 'rgb(114, 114, 114)', fontWeight: 'bold', fontSize: '16px' }}>
                                                 {"GASTOS DEL SR(A).:  " + localStorage.getItem('empleado')}
                                             </div >
@@ -542,8 +545,8 @@ function Asignacion() {
                                                         {
                                                             montoGastado < nombreVentanaMOnto ?
 
-                                                                <p className='textoDetalle'>{montoGastado?'MONTO GASTADO : ' + montoGastado + ' Bs.':'MONTO GASTADO : 0 Bs.'}</p> :
-                                                                <p className='textoDetalle'>{montoGastado?'MONTO GASTADO : ' + montoGastado + ' Bs.':'MONTO GASTADO : 0 Bs.'}
+                                                                <p className='textoDetalle'>{montoGastado ? 'MONTO GASTADO : ' + montoGastado + ' Bs.' : 'MONTO GASTADO : 0 Bs.'}</p> :
+                                                                <p className='textoDetalle'>{montoGastado ? 'MONTO GASTADO : ' + montoGastado + ' Bs.' : 'MONTO GASTADO : 0 Bs.'}
                                                                     <span style={{ color: 'red', fontSize: '12px' }}> El gasto excedió a monto asignado</span></p>
                                                         }
 
@@ -998,8 +1001,8 @@ function Asignacion() {
                                                 <FontAwesomeIcon className='btn-icon-nuevo' icon={faEdit}></FontAwesomeIcon>Actualizar</Button>
                                         </div>
                                     </Modal>
-                                    <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
-                                <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
+                                    <div className='footer-pague'> ©EMPRESA CONSTRUCTORA BSCH<Link className='ml-3' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
+                                        <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
                                 </div>
                             </div>
                         </div>

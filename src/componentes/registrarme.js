@@ -20,13 +20,15 @@ function Registrame() {
     const [apellidoMat, setApellidoMat] = useState({ campo: '', valido: null })
     const [telefono, setTelefono] = useState({ campo: '', valido: null })
     const [modalVer, setModalVer] = useState(false)
-    const [proyecto, setProyecto] = useState([])
+    const [enviado, setEnviado] = useState(0);
+
 
 
     const insertar = async () => {
 
         if (username.valido === 'true' && password.valido === 'true' && telefono.valido === 'true' && ci.valido === 'true' &&
-            nombre.valido === 'true' && apellidoPat.valido === 'true' && apellidoMat.valido === 'true') {
+            nombre.valido === 'true' && apellidoPat.valido === 'true' && apellidoMat.valido === 'true' && enviado === 0) {
+                setEnviado(1)
             let today = new Date()
             let fecha = today.toISOString().split('T')[0]
             const pas = md5(password.campo)
@@ -48,7 +50,7 @@ function Registrame() {
                     window.location.href = '/'
                 } else toast.error(json.data.msg)
             })
-        } else toast.error('Complete todos los campos requeridos en el formulario')
+        } else {toast.error('Complete todos los campos requeridos en el formulario'); setEnviado(0)}
     }
 
 

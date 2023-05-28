@@ -35,6 +35,8 @@ function Gastos() {
     const [factura, setFactura] = useState(0);
     const [asignarArchivo, setAsignarArchivo] = useState(0);
     const [descripcionGasto, setDescripcionGasto] = useState(0);
+    const [one, setOne] = useState(0);
+
 
 
 
@@ -365,6 +367,7 @@ function Gastos() {
             setIdProveedor({ campo: null, valido: null })
             setModalInsertar(false)
             setModalEditar(false)
+            setOne(0)
         }
 
 
@@ -408,15 +411,15 @@ function Gastos() {
                 calidad = 0.3
             if (file.size > 5000000)
                 calidad = 0.2
-            console.log(calidad, "calidad de la imagen")
+            // console.log(calidad, "calidad de la imagen")
 
-            console.log(estadoCheck, 'tipo de la factura')
-
+            // console.log(estadoCheck, 'tipo de la factura')
             if (fecha.valido === 'true' &&
                 monto.valido === 'true' && idTipo.valido === 'true' &&
                 comprobante.valido === 'true' && idTipo.valido === 'true' &&
-                idClasificaion.valido === 'true' && tipoPago.valido === 'true'
+                idClasificaion.valido === 'true' && tipoPago.valido === 'true' && one === 0
             ) {
+                setOne(1)
                 axios.post(URL + '/gasto/insert', {
                     fecha: fecha.campo,
                     egreso: monto.campo,
@@ -434,7 +437,8 @@ function Gastos() {
                 }).then(json => {
                     if (json.data.ok) {
                         if (asignarArchivo === 0) {
-                            console.log(json.data.data, 'sin imagen', file, idAsignacion, 'idAsignacion')
+
+                            // console.log(json.data.data, 'sin imagen', file, idAsignacion, 'idAsignacion')
                             setGasto(json.data.data)
                             listarGastos(idAsignacion.campo)
                             setModalGastos(true)
@@ -461,7 +465,7 @@ function Gastos() {
                                             listarGastos(idAsignacion.campo)
                                             toast.success(j.data.msg)
                                             empty()
-                                        } else toast.error(j.data.msg)
+                                        } else {toast.error(json.data.msg);setOne(0)}
                                     })
                                 },
                                 error(err) {
@@ -470,9 +474,7 @@ function Gastos() {
                             });
                         }
 
-                    }
-                    else
-                        toast.error(json.data.msg)
+                    }else {toast.error(json.data.msg);setOne(0)}
                 })
             } else {
                 toast.error('Complete los campos')
@@ -620,7 +622,8 @@ function Gastos() {
                     eliminar: gasto[0].img ? gasto[0].id : false
                 }).then(json => {
                     if (json.data.ok) {
-                        setListaGasto(json.data.data)
+                        setListaGasto(json.data.data[0])
+                        setMontoGatado(json.data.data[1])
                         toast.success(json.data.msg)
                         setModalGastos(false)
                     }
@@ -770,7 +773,7 @@ function Gastos() {
                                                     </div>
                                                     <div className="table table-responsive custom">
 
-                                                        <Table className="table table-sm tableLarge" >
+                                                        <Table className="table table-sm tableLarge tabla-movil" >
                                                             <thead>
                                                                 <tr>
                                                                     <th className="col-2">Fecha</th>
@@ -1557,8 +1560,8 @@ function Gastos() {
                                         </Modal>
                                     </div>
                                 </div>
-                                <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
-                                <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
+                                <div className='footer-pague'> ©EMPRESA CONSTRUCTORA BSCH  <Link className='ml-3' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
+                                    <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
                             </div>
                         </div>
                     </div>

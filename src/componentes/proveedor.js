@@ -27,6 +27,8 @@ function Proveedor() {
     const [direccion, setDireccion] = useState({ campo: null, valido: null })
     const [telefono, setTelefono] = useState({ campo: null, valido: null })
     const [ciudad, setCiudad] = useState({ campo: null, valido: null })
+    const [enviado, setEnviado] = useState(0);
+
 
 
     const [inputBuscar, setInputBuscar] = useState({ campo: null, valido: null })
@@ -93,6 +95,7 @@ function Proveedor() {
             setTelefono({ campo: null, valido: null })
             setDireccion({ campo: null, valido: null })
             setCiudad({ campo: null, valido: null })
+            setEnviado(0)
         }
 
 
@@ -111,7 +114,8 @@ function Proveedor() {
         const insertar = async () => {
 
             if (nombre.valido === 'true' && nit.valido === 'true' &&
-                telefono.valido === 'true' ) {
+                telefono.valido === 'true' && enviado === 0 ) {
+                    setEnviado(1)
                 axios.post(URL + '/proveedor/insertar',
                     {
                         nombre: nombre.campo,
@@ -127,7 +131,7 @@ function Proveedor() {
                             toast.success(json.data.msg)
                             vaciarDatos()
                             setModalInsertar(false)
-                        } else toast.error(json.data.msg)
+                        } else {toast.error(json.data.msg);setEnviado(0)}
                     })
             } else toast.error('Completar todos los campos de l formulario')
         }
@@ -297,7 +301,7 @@ function Proveedor() {
 
                                             <div className=" table table-responsive  custom"  >
 
-                                                <Table className="table  table-sm p-2">
+                                                <Table className="table  table-sm p-2 tabla-movil">
                                                     <thead>
                                                         <tr >
                                                             <th className="col-2 ">Nombre</th>
@@ -507,7 +511,7 @@ function Proveedor() {
 
                                 </div>
 
-                                <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
+                                <div className='footer-pague'> ©EMPRESA CONSTRUCTORA BSCH  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
                                 <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
                             </div>
                         </div>

@@ -42,6 +42,8 @@ function Usuario() {
     const [modalInsertar, setModalInsertar] = useState(false)
     const [modalActualizar, setModalActualizar] = useState(false)
     const [modalVer, setModalVer] = useState(false)
+    const [enviado, setEnviado] = useState(0);
+
 
     const [eliminado, seteliminado] = useState(false)
 
@@ -309,7 +311,8 @@ function Usuario() {
         const insertar = async () => {
 
             if (idRol.valido === 'true' && username.valido === 'true' && password.valido === 'true' && telefono.valido === 'true' && ci.valido === 'true' &&
-                nombre.valido === 'true' && apellidoPat.valido === 'true' && apellidoMat.valido === 'true' && sueldo.valido === 'true') {
+                nombre.valido === 'true' && apellidoPat.valido === 'true' && apellidoMat.valido === 'true' && sueldo.valido === 'true' && enviado === 0) {
+                setEnviado(1)
                 let today = new Date()
                 let fecha = today.toISOString().split('T')[0]
                 const pas = md5(password.campo)
@@ -340,8 +343,9 @@ function Usuario() {
                         setApellidoMat({ campo: null, valido: null })
                         setCi({ campo: null, valido: null })
                         setTelefono({ campo: null, valido: null })
+                        setEnviado(0)
 
-                    } else toast.error(json.data.msg)
+                    } else {toast.error(json.data.msg);setEnviado(0)}
                 })
             } else toast.error('Complete todos los campos requeridos en el formulario')
         }
@@ -429,7 +433,7 @@ function Usuario() {
                                             </div>
                                             <div className=" table table-responsive  custom" >
 
-                                                <Table className="table  table-sm p-2">
+                                                <Table className="table  table-sm p-2 tabla-movil">
                                                     <thead>
                                                         <tr >
                                                             <th className="col-1 ">C.I.</th>
@@ -856,7 +860,7 @@ function Usuario() {
                                         </div>
                                     </Modal>
                                 </div>
-                                <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
+                                <div className='footer-pague'>©EMPRESA CONSTRUCTORA BSCH <Link className='ml-3' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
                                     <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
                             </div>
                         </div>

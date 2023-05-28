@@ -35,6 +35,10 @@ function Home() {
                     {tam < 992 &&
                         <p className="nav-link mt-2" style={{ color: 'white' }} data-widget="pushmenu" role="button"> <i className="fas fa-bars"></i> </p>
                     }
+
+                    <div className="text-center mt-4">
+                        <p className=""  style={{ fontSize: '20px', color:'#BDC3C7' }}>BSCH</p>
+                    </div>
                     {(parseInt(localStorage.getItem('numRol')) === 1) && tam < 992 &&
                         <div data-widget="pushmenu" role="button">
 

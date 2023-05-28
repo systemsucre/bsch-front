@@ -191,7 +191,7 @@ function Formulario() {
 
             <div className="card card-outline card-primary mt-0">
               <div className="card-header text-center">
-                <h4 className="login-box-msg"> <p>BS CH</p></h4>
+                <h4 className="login-box-msg"> <p>CIVIL COM</p></h4>
                 <p className='text-danger' >{mensaje}</p>
               </div>
               <div className=" card-body">
@@ -241,9 +241,9 @@ function Formulario() {
                 <br></br>
                 {/* {empresa.length > 0 &&
                   <p className="text-left">   
-                    <div className="info-empresa">{'Desarrollador: Gustavo Aguilar T'}</div>
+                    <div className="info-empresa">{'Desarrollador: Icialize .Dev'}</div>
                     <div className="info-empresa"> <i className="fas fa-phone mr-1"></i>{'Contactos : 71166513' }</div>
-                    <div className="info-empresa"><FontAwesomeIcon icon={faMailBulk} className='mr-2'></FontAwesomeIcon>{'gustavoaguilares@gmail.com'}</div>
+                    <div className="info-empresa"><FontAwesomeIcon icon={faMailBulk} className='mr-2'></FontAwesomeIcon>{'inicialize.dev@gmail.com'}</div>
                   </p>
                 } */}
                 {empresa.length > 0 &&

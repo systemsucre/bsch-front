@@ -40,6 +40,8 @@ function Proyecto() {
     const [usuario, setUsuario] = useState({ campo: null, valido: null })
     const [fechaConclusion, setFechaConclusion] = useState({ campo: null, valido: null })
     const [eliminado, seteliminado] = useState(false)
+    const [enviado, setEnviado] = useState(0);
+
 
     const [listEstado, setListEstado] = useState([])
 
@@ -145,6 +147,7 @@ function Proyecto() {
             setAmpliacion({ campo: null, valido: null })
             setFechaConclusion({ campo: null, valido: null })
             setEstado({ campo: null, valido: null })
+            setEnviado(0)
         }
 
         const abrirModalInsetar = () => {
@@ -175,8 +178,9 @@ function Proyecto() {
             // console.log("datos lista : ", codigo, laboratorio)
 
             if (numero.valido === 'true' && codigo.valido === 'true' && proyecto.valido === 'true' && nombreCompleto.valido === 'true' &&
-                montoContrato.valido === 'true' && montoModificado.valido === 'true' && montoPagado.valido === 'true' &&
+                montoContrato.valido === 'true' && montoModificado.valido === 'true' && montoPagado.valido === 'true' && enviado === 0 &&
                 fechaInicio.valido === 'true' && plazoInicio.valido === 'true' && ampliacion.valido === 'true' && idEstado.valido === 'true') {
+                setEnviado(1)
                 axios.post(URL + '/proyecto/insertar', {
                     numero: numero.campo,
                     codigo: codigo.campo,
@@ -197,8 +201,7 @@ function Proyecto() {
                         setLista(json.data.data)
                         toast.success(json.data.msg)
                     }
-                    else
-                        toast.error(json.data.msg)
+                    else {toast.error(json.data.msg);setEnviado(0)}
                 })
             } else {
                 toast.error('Complete los campos')
@@ -273,7 +276,7 @@ function Proyecto() {
         const eliminar = async () => {
             const ok = window.confirm('¿está lista de eliminar este registro ?');
             if (ok) {
-                axios.post(URL + '/proyecto/eliminar', { id: id.campo, fecha:fechaHora }).then(json => {
+                axios.post(URL + '/proyecto/eliminar', { id: id.campo, fecha: fechaHora }).then(json => {
                     if (json.data.ok) {
                         vaciarDatos()
                         setLista(json.data.data)
@@ -323,7 +326,7 @@ function Proyecto() {
         }
 
 
-    
+
 
         const restaurar = async (ids) => {
 
@@ -331,7 +334,7 @@ function Proyecto() {
             if (ok) {
                 if (ids !== null) {
 
-                    axios.post(URL + '/proyecto/restaurar', { id: ids, fecha:fechaHora }).then(json => {
+                    axios.post(URL + '/proyecto/restaurar', { id: ids, fecha: fechaHora }).then(json => {
                         if (json.data.ok) {
                             vaciarDatos()
                             setLista(json.data.data)
@@ -367,7 +370,7 @@ function Proyecto() {
                                         Proyectos <span className='text-eliminado'>{eliminado === false ? null : '[Elementos eliminados]'}</span>
                                     </div >
 
-                                    <div  style={{ background: 'white' }} >
+                                    <div style={{ background: 'white' }} >
                                         <div className="contenedor-cabecera">
                                             <div className='row' >
                                                 {eliminado === false &&
@@ -389,10 +392,10 @@ function Proyecto() {
                                             </div>
                                         </div>
                                         <div className='contenedor'>
-                                          
+
                                             <div className="table table-responsive custom">
 
-                                                <Table className="table table-sm" >
+                                                <Table className="table table-sm tabla-movil" >
                                                     <thead>
                                                         <tr className='col-12'>
                                                             <th className="col-1">Número</th>
@@ -470,8 +473,8 @@ function Proyecto() {
                                                         Plazos
                                                     </div>
                                                     <p className='textoDetalle'>{'FECHA INICIO :  ' + fechaInicio.campo}</p>
-                                                    <p className='textoDetalle'>{'PLAZO INCIAL :  ' + plazoInicio.campo+' Dias.'}</p>
-                                                    <p className='textoDetalle'>{'AMPLIACION :  ' + ampliacion.campo+' Dias.'}</p>
+                                                    <p className='textoDetalle'>{'PLAZO INCIAL :  ' + plazoInicio.campo + ' Dias.'}</p>
+                                                    <p className='textoDetalle'>{'AMPLIACION :  ' + ampliacion.campo + ' Dias.'}</p>
                                                     <p className='textoDetalle'>{'FECHA CONCLUSION :  ' + fechaConclusion.campo}</p>
                                                     <p className='textoDetalle'>{'ESTADO :  ' + estado.campo}</p>
                                                 </div>
@@ -799,8 +802,8 @@ function Proyecto() {
                                             </div>
                                         </Modal>
                                     </div>
-                                    <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
-                                <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
+                                    <div className='footer-pague'> ©EMPRESA CONSTRUCTORA BSCH  <Link className='ml-3' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
+                                        <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
 
                                 </div>
                             </div>

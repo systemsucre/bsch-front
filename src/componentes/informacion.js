@@ -30,6 +30,8 @@ function Informaciones() {
     const [usuario, setUsuario] = useState({ campo: null, valido: null })
     const [creado, setCreado] = useState({ campo: null, valido: null })
     const [modificado, setModificado] = useState({ campo: null, valido: null })
+    const [enviado, setEnviado] = useState(0);
+
 
 
     useEffect(() => {
@@ -72,7 +74,8 @@ function Informaciones() {
 
         const insertar = async () => {
             if (nombre.valido === 'true' && telefono.valido === 'true' &&
-                direccion.valido === 'true' && correo.valido === 'true') {
+                direccion.valido === 'true' && correo.valido === 'true' && enviado === 0) {
+                setEnviado(1)
                 let today = new Date()
                 let fecha = today.toISOString().split('T')[0]
 
@@ -93,9 +96,10 @@ function Informaciones() {
                             setUsuario({ campo: json.data.data[0].usuario, valido: 'true' })
                             setCreado({ campo: json.data.data[0].creado, valido: 'true' })
                             setModificado({ campo: json.data.data[0].modificado, valido: 'true' })
+                            setEnviado(0)
                             setModalInsertar(false)
                             toast.success(json.data.msg)
-                        } else toast.error(json.data.msg)
+                        } else {toast.error(json.data.msg);setEnviado(0)}
                     })
                 } catch (error) {
                     return error
@@ -183,8 +187,8 @@ function Informaciones() {
                             <div className="content" >
 
                                 <div className="container-fluid pt-1" >
-                                    <div style={{ background: 'white', height:'520px' }}>
-                                        
+                                    <div style={{ background: 'white', height: '520px' }}>
+
 
                                         <div className=" card-widget widget-user-2 col-lg-7 col-md-7 col-sm-10 col-sm-12 col-12 m-auto mt-3 pt-5 pb-5">
                                             <div className="widget-user-header bg-success " >
@@ -367,8 +371,8 @@ function Informaciones() {
                                         <Toaster position='top-right' />
 
                                     </div>
-                                    <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
-                                <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
+                                    <div className='footer-pague'> ©EMPRESA CONSTRUCTORA BSCH <Link className='ml-3' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
+                                        <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
 
                                 </div>
 

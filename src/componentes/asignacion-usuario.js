@@ -125,7 +125,7 @@ function UsuarioAsignacion() {
                                             </div>
                                             <div className=" table table-responsive  custom">
 
-                                                <Table className="table  table-sm">
+                                                <Table className="table  table-sm tabla-movil">
                                                     <thead>
                                                         <tr >
                                                             <th className="col-2 ">C.I.</th>
@@ -178,7 +178,7 @@ function UsuarioAsignacion() {
                                     </div>
 
                                 </div>
-                                <div className='footer-pague'> @COPYRIGHT  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
+                                <div className='footer-pague'> ©EMPRESA CONSTRUCTORA BSCH  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
                                 <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
 
                             </div>
