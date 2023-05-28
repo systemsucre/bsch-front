@@ -221,7 +221,7 @@ function Proyecto() {
                     montopagado: montoPagado.campo,
                     fechainicio: fechaInicio.campo,
                     plazoinicio: plazoInicio.campo,
-                    ampliacion: plazoInicio.campo,
+                    ampliacion: ampliacion.campo,
                     fechaconclusion: fechaConclusion.campo,
                     idEstado: idEstado.campo,
                     modificado: fechaHora

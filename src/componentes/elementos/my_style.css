@@ -1911,6 +1911,14 @@ td {
     margin-left: 8px;
 }
 
+.smalldiv-1 {
+    height: 5px;
+    width: 5px;
+    border-radius: 20%;
+    margin-top: 5px;
+    margin-left: 8px;
+}
+
 .labels {
     color: #6c6d6d;
     font-size: 13px;

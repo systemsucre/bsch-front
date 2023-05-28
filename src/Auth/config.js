@@ -1,5 +1,5 @@
-const URL = 'http://localhost:3001'
-// const URL = 'https://app.bschsucre.com'
+// const URL = 'http://localhost:3001'
+const URL = 'https://app.bschsucre.com'
 //  const URL = 'https://spclaver.alwaysdata.net'
 
 const TIEMPO_INACTIVO = 60 // MINUTOS DE TOLERANCIA ANTESDE QUE EL USUARIO VUELVA A INTERACTUAR CON EL SISTEMA YA SEA MEDIANTE MUOSE O TECLADO

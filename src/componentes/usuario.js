@@ -125,8 +125,8 @@ function Usuario() {
         const rellenar = async () => {
             listarRol()
             setId({ campo: usuario[0].id, valido: 'true' })
-            setIdRol({ campo: usuario[0].idRol, valido: 'true' })
-            setSueldo({ campo: usuario[0].sueldo, valido: 'true' })
+            usuario[0].idRol ? setIdRol({ campo: usuario[0].idRol, valido: 'true' }): setIdRol({ campo: null, valido: null })
+            usuario[0].sueldo ? setSueldo({ campo: usuario[0].sueldo, valido: 'true' }): setIdRol({ campo: null, valido: null })
             setNombre({ campo: usuario[0].nombre, valido: 'true' })
             setApellidoPat({ campo: usuario[0].apellido1, valido: 'true' })
             setApellidoMat({ campo: usuario[0].apellido2, valido: 'true' })
@@ -230,6 +230,7 @@ function Usuario() {
             }
         }
 
+
         const deshabilitar = async () => {
             const ok = window.confirm('Esta seguro de esta operacion ?');
 
@@ -257,9 +258,11 @@ function Usuario() {
             if (ok === true) {
                 let today = new Date()
                 let fecha = today.toISOString().split('T')[0]
-                if (id.valido === 'true') {
+                if (id.valido === 'true' && idRol.valido === 'true' && sueldo.valido === 'true') {
                     axios.post(URL + '/usuario/habilitar', {
                         id: id.campo,
+                        idrol: idRol.campo,
+                        sueldo: sueldo.campo,
                         modificado: fecha + ' ' + new Date().toLocaleTimeString()
                     }).then(json => {
                         if (json.data.ok) {
@@ -268,7 +271,7 @@ function Usuario() {
                             setModalActualizar(false)
                         } else toast.error(json.data.msg)
                     })
-                }
+                }else toast.error('seleccione el rol e inserte el sueldo')
             }
         }
 
