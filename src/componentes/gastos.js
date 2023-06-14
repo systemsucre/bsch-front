@@ -132,8 +132,11 @@ function Gastos() {
             if (inputBuscar.valido === null) listarAsignacion(parseInt(localStorage.getItem('idEmpleado')))
             if (inputBuscar.valido === 'false') listarAsignacion(parseInt(localStorage.getItem('idEmpleado')))
 
+            if (inputBuscar_.valido === null && ventana === 2) listarGastos(idAsignacion.campo)
+            if (inputBuscar_.valido === 'false' && ventana === 2) listarGastos(idAsignacion.campo)
+
             document.title = localStorage.getItem('nombre') + ' ' + localStorage.getItem('apellido')
-        }, [inputBuscar])
+        }, [inputBuscar, inputBuscar_])
 
         const token = localStorage.getItem("token")
         axios.interceptors.request.use(
@@ -465,7 +468,7 @@ function Gastos() {
                                             listarGastos(idAsignacion.campo)
                                             toast.success(j.data.msg)
                                             empty()
-                                        } else {toast.error(json.data.msg);setOne(0)}
+                                        } else { toast.error(json.data.msg); setOne(0) }
                                     })
                                 },
                                 error(err) {
@@ -474,7 +477,7 @@ function Gastos() {
                             });
                         }
 
-                    }else {toast.error(json.data.msg);setOne(0)}
+                    } else { toast.error(json.data.msg); setOne(0) }
                 })
             } else {
                 toast.error('Complete los campos')
@@ -599,7 +602,8 @@ function Gastos() {
                 if (listaGasto.length > 0 && id.valido === 'true') {
                     axios.post(dir, { id: id.campo, idasignacion: idAsignacion.campo }).then(json => {
                         if (json.data.ok) {
-                            setListaGasto(json.data.data)
+                            // setListaGasto(json.data.data)
+                            listarGastos(idAsignacion.campo)
                             setVentana(2)
                             toast.success(json.data.msg)
                         } else {
@@ -682,7 +686,8 @@ function Gastos() {
 
         const insertarClasificacion = async () => {
 
-            if (clasificacion.valido === 'true') {
+            if (clasificacion.valido === 'true' && one === 0) {
+                setOne(1)
 
                 axios.post(URL + '/clasificacion/insertaraux', {
                     nombre: clasificacion.campo,
@@ -692,30 +697,28 @@ function Gastos() {
                         setModalInsertarClasificacion(false)
                         setIdClasificacionDB(json.data.data)
                         setClasificacion({ campo: null, valido: null })
-
-
                         toast.success(json.data.msg)
+                        setOne('')
                     }
-                    else toast.error(json.data.msg)
+                    else {toast.error(json.data.msg); setOne(0)}
                 })
-            } else {
-                toast.error('Complete todos los campos')
-            }
+            } else toast.error('Complete todos los campos')
         }
+
 
         const insertarProveedor = async () => {
 
-            if (nombre.valido === 'true' && nit.valido === 'true' &&
-                telefono.valido === 'true' && direccion.valido === 'true' &&
-                pais.valido === 'true' && cuenta.valido === 'true') {
+            if (nombre.valido === 'true' &&
+                telefono.valido === 'true' && one === 0) {
+                    setOne(1)
                 axios.post(URL + '/proveedor/insertaraux',
                     {
                         nombre: nombre.campo,
-                        nit: nit.campo,
+                        nit: nit.campo ? nit.campo : '00000',
                         telefono: telefono.campo,
-                        direccion: direccion.campo,
-                        pais: pais.campo,
-                        cuenta: cuenta.campo,
+                        direccion: direccion.campo ? direccion.campo:'SIN ESPECIFICAR',
+                        pais: pais.campo ? pais.campo :'SIN ESPECIFICAR',
+                        cuenta: cuenta.campo ? cuenta.campo:'SIN ESPECIFICAR',
                         creado: fechaHora
 
                     }).then(json => {
@@ -730,7 +733,8 @@ function Gastos() {
                             setDireccion({ campo: null, valido: null })
                             setPais({ campo: null, valido: null })
                             setCuenta({ campo: null, valido: null })
-                        } else toast.error(json.data.msg)
+                            setOne(0)
+                        } else {toast.error(json.data.msg); setOne(0)}
                     })
             } else toast.error('Completar todos los campos de l formulario')
         }
@@ -776,6 +780,7 @@ function Gastos() {
                                                         <Table className="table table-sm tableLarge tabla-movil" >
                                                             <thead>
                                                                 <tr>
+                                                                    <th className="col-1 btn-acciones-ajuste-tbl-2"></th>
                                                                     <th className="col-2">Fecha</th>
                                                                     <th className="col-2">Proyecto</th>
                                                                     <th className="col-3 ">Descripcion</th>
@@ -783,12 +788,20 @@ function Gastos() {
                                                                     <th className="col-2">Monto Bs.</th>
                                                                     <th className="col-1 text-center">Tipo</th>
                                                                     <th className="col-2 text-center">Estado</th>
-                                                                    <th className="col-2"></th>
+                                                                    {/* <th className="col-2"></th> */}
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 {listaAsignacion.map((s) => (
                                                                     <tr className='item' key={s.id}>
+                                                                        <td>
+                                                                            <Button className='btn-equipajes-tbl' onClick={() => {
+                                                                                listarGastos(s.id); setNombreVentana(s.comprobante); setNombreVentanaMonto(s.monto)
+                                                                                setIdAsignacion({ campo: s.id, valido: 'true' }); setDescripcionGasto(s.descripcion);
+                                                                                setVentanaProyecto(s.proyecto)
+                                                                            }} ><FontAwesomeIcon icon={faDollarSign}></FontAwesomeIcon></Button>
+                                                                            <Button className='btn-ver-tbl' onClick={() => check(s.id)}><FontAwesomeIcon icon={faList}></FontAwesomeIcon></Button>
+                                                                        </td>
                                                                         <td className="col-2">{s.fecha}</td>
                                                                         <td className="col-2">{s.proyecto}</td>
                                                                         <td className="col-4 ">{s.descripcion}</td>
@@ -805,15 +818,6 @@ function Gastos() {
                                                                                 e.id === s.estado && <td className="col-1 text-center">{e.nombre}</td>
                                                                             ))
                                                                         }
-
-                                                                        <td className="col-2 largTable">
-                                                                            <FontAwesomeIcon icon={faList} onClick={() => check(s.id)} className='botonEliminar' />
-                                                                            <FontAwesomeIcon icon={faDollarSign} onClick={() => {
-                                                                                listarGastos(s.id); setNombreVentana(s.comprobante); setNombreVentanaMonto(s.monto)
-                                                                                setIdAsignacion({ campo: s.id, valido: 'true' }); setDescripcionGasto(s.descripcion);
-                                                                                setVentanaProyecto(s.proyecto)
-                                                                            }} className='botonEditar' />
-                                                                        </td>
                                                                     </tr>
                                                                 ))}
                                                             </tbody>
@@ -852,7 +856,7 @@ function Gastos() {
                                                             <p className='titleDetalle'>{'MONTO ASIGNADO  : ' + nombreVentanaMOnto + '  Bs.'}</p>
 
                                                             {
-                                                                montoGastado < nombreVentanaMOnto ?
+                                                                montoGastado <= nombreVentanaMOnto ?
 
                                                                     <p className='textoDetalle'><span> MONTO GASTADO</span>{montoGastado ? ' Bs. ' + montoGastado : ' : 0 Bs.'}</p> :
                                                                     <p className='textoDetalle'>{'MONTO GASTADO : ' + montoGastado + ' Bs.'}
@@ -896,17 +900,17 @@ function Gastos() {
                                                             <thead>
                                                                 <tr className='col-12'>
                                                                     <th className="col-2">Fecha</th>
-                                                                    <th className="col-2 descripcion ">Descripción</th>
+                                                                    <th className="col-3 descripcion ">Descripción</th>
                                                                     <th className="col-2">Egreso Bs.</th>
                                                                     <th className="col-1"></th>
-                                                                    <th className="col-2">Comprobante</th>
+                                                                    <th className="col-1">Comprobante</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 {listaGasto.map((s) => (
                                                                     <tr className='item' key={s.id} >
                                                                         <td className="col-2">{s.fecha}</td>
-                                                                        <td className="col-2 descripcion">{s.descripcion}</td>
+                                                                        <td className="col-3 descripcion">{s.descripcion}</td>
                                                                         <td className="col-2">{s.egreso}</td>
                                                                         <td className="col-1 largTable">
                                                                             {s.img &&
@@ -921,7 +925,7 @@ function Gastos() {
                                                                                 <FontAwesomeIcon icon={faList} onClick={() => verEgreso(s.id)} className='botonEditar-one' />
                                                                             }
                                                                         </td>
-                                                                        <td className="col-2">{s.comprobante}</td>
+                                                                        <td className="col-1">{s.comprobante}</td>
                                                                     </tr>
                                                                 ))}
                                                             </tbody>
@@ -937,6 +941,21 @@ function Gastos() {
                                                             <FontAwesomeIcon className='col-auto next' icon={faArrowRight} onClick={() => siguienteGastos()}> </FontAwesomeIcon>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </>
+                                        }
+                                        {
+                                            ventana === 3 &&
+                                            <>
+                                                <article className='light-box pt-1'>
+                                                    <p className='medicoList' style={{ textAlign: 'left', color: 'white', paddingLeft: '44px' }}><strong> {'NRO. COMPROBANTE  :  ' + comprobanteImage}</strong></p>
+                                                    <img src={URL + '/' + image} alt={'...'} />
+                                                </article>
+                                                <div className="row botonModal mt-2 mb-2">
+                                                    <Button className='btn-restaurar col-auto' onClick={() => setVentana(2)} >
+                                                        <FontAwesomeIcon className='btn-icon-eliminar' icon={faWindowClose}></FontAwesomeIcon>Cerrar ventana </Button>
+                                                    <Button className='btn-restaurar col-auto' onClick={() => eliminarImagen()} >
+                                                        <FontAwesomeIcon className='btn-icon-eliminar' icon={faTrashAlt}></FontAwesomeIcon>Eliminar Imagen </Button>
                                                 </div>
                                             </>
                                         }
@@ -1104,21 +1123,6 @@ function Gastos() {
                                         </Modal>
 
 
-                                        {
-                                            ventana === 3 &&
-                                            <>
-                                                <article className='light-box pt-1'>
-                                                    <p className='medicoList' style={{ textAlign: 'left', color: 'white', paddingLeft: '44px' }}><strong> {'NRO. COMPROBANTE  :  ' + comprobanteImage}</strong></p>
-                                                    <img src={URL + '/' + image} alt={'...'} />
-                                                </article>
-                                                <div className="row botonModal mt-2 mb-2">
-                                                    <Button className='btn-restaurar col-auto' onClick={() => setVentana(2)} >
-                                                        <FontAwesomeIcon className='btn-icon-eliminar' icon={faWindowClose}></FontAwesomeIcon>Cerrar ventana </Button>
-                                                    <Button className='btn-restaurar col-auto' onClick={() => eliminarImagen()} >
-                                                        <FontAwesomeIcon className='btn-icon-eliminar' icon={faTrashAlt}></FontAwesomeIcon>Eliminar Imagen </Button>
-                                                </div>
-                                            </>
-                                        }
 
 
 
@@ -1428,14 +1432,6 @@ function Gastos() {
                                                         </div>
                                                     </div>}
                                             </ModalBody>
-                                            {/* <div className="row botonModal">
-                                                <div className="col-auto">
-                                                    <Button className='cancelarVentanaSolicitud' onClick={() => setModalEditar(false)} >Cancelar <span ><FontAwesomeIcon icon={faCaretLeft}></FontAwesomeIcon></span> </Button>
-                                                </div>
-                                                <div className="col-auto">
-                                                    <Button className='Historial' onClick={() => update()}>Actualizar <span ><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon></span> </Button>
-                                                </div>
-                                            </div> */}
                                             <div className="row botonModal">
                                                 <Button className='btn-restaurar col-auto' onClick={() => setModalEditar(false)} >
                                                     <FontAwesomeIcon className='btn-icon-eliminar' icon={faWindowClose}></FontAwesomeIcon>Cancelar</Button>
@@ -1483,7 +1479,6 @@ function Gastos() {
                                                         <ComponenteInputUser
                                                             estado={nombre}
                                                             cambiarEstado={setNombre}
-                                                            name="nombre"
                                                             placeholder="Proveedor"
                                                             ExpresionRegular={INPUT.INPUT_BUSCAR}  //expresion regular
                                                             etiqueta='Nombre'
@@ -1494,18 +1489,17 @@ function Gastos() {
                                                         <ComponenteInputUser
                                                             estado={nit}
                                                             cambiarEstado={setNit}
-                                                            name="nit"
                                                             placeholder="Nit"
                                                             ExpresionRegular={INPUT.INPUT_BUSCAR}  //expresion regular
                                                             etiqueta='NIT'
                                                             msg={'Escriba una el nit'}
+                                                            important={false}
                                                         />
                                                     </div>
                                                     < div className="col-12 col-sm-6 col-md-6 col-lg-6 ">
                                                         <ComponenteInputUser
                                                             estado={telefono}
                                                             cambiarEstado={setTelefono}
-                                                            name="telefono"
                                                             placeholder="Telefono"
                                                             ExpresionRegular={INPUT.TELEFONO}  //expresion regular
                                                             etiqueta='Telefono/cel.'
@@ -1516,39 +1510,38 @@ function Gastos() {
                                                         <ComponenteInputUser
                                                             estado={direccion}
                                                             cambiarEstado={setDireccion}
-                                                            name="direccion"
                                                             placeholder="Direccion"
                                                             ExpresionRegular={INPUT.DIRECCION}  //expresion regular
                                                             etiqueta='Direccion'
                                                             msg={'Este campo admite letras, numeros y caracteres'}
+                                                            important={false}
                                                         />
                                                     </div>
                                                     < div className="col-12 col-sm-6 col-md-6 col-lg-6">
                                                         <ComponenteInputUser
                                                             estado={pais}
                                                             cambiarEstado={setPais}
-                                                            name="pais"
                                                             placeholder="pais"
                                                             ExpresionRegular={INPUT.NOMBRE_PERSONA}  //expresion regular
                                                             etiqueta='Pais'
                                                             msg={'Este campo solo admite letras'}
+                                                            important={false}
                                                         />
                                                     </div>
                                                     < div className="col-12 col-sm-6 col-md-6 col-lg-6 ">
                                                         <ComponenteInputUser
                                                             estado={cuenta}
                                                             cambiarEstado={setCuenta}
-                                                            name="cuenta"
                                                             placeholder="Cuenta "
                                                             ExpresionRegular={INPUT.CUENTA}  //expresion regular
                                                             etiqueta='Cuenta Bancaria'
                                                             msg={'Este campo solo admite números'}
+                                                            important={false}
                                                         />
                                                     </div>
                                                 </div>
                                             </ModalBody>
                                             <div className="row botonModal">
-
                                                 <Button className="btn-restaurar col-auto" onClick={() => { setModalInsertarProveedor(false) }} >
                                                     <FontAwesomeIcon className='btn-icon-eliminar' icon={faWindowClose}></FontAwesomeIcon>Cancelar
                                                 </Button>

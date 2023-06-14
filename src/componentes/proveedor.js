@@ -26,7 +26,8 @@ function Proveedor() {
     const [nit, setNit] = useState({ campo: null, valido: null })
     const [direccion, setDireccion] = useState({ campo: null, valido: null })
     const [telefono, setTelefono] = useState({ campo: null, valido: null })
-    const [ciudad, setCiudad] = useState({ campo: null, valido: null })
+    const [pais, setPais] = useState({ campo: null, valido: null })
+    const [cuenta, setCuenta] = useState({ campo: null, valido: null })
     const [enviado, setEnviado] = useState(0);
 
 
@@ -94,7 +95,8 @@ function Proveedor() {
             setNit({ campo: null, valido: null })
             setTelefono({ campo: null, valido: null })
             setDireccion({ campo: null, valido: null })
-            setCiudad({ campo: null, valido: null })
+            setPais({ campo: null, valido: null })
+            setCuenta({ campo: null, valido: null })
             setEnviado(0)
         }
 
@@ -104,25 +106,26 @@ function Proveedor() {
             setNombre({ campo: pro.nombre, valido: 'true' })
             setTelefono({ campo: pro.telefono, valido: 'true' })
             setNit({ campo: pro.nit, valido: 'true' })
-
             setDireccion({ campo: pro.direccion, valido: 'true' })
-            setCiudad({ campo: pro.ciudad, valido: 'true' })
+            setPais({ campo: pro.ciudad, valido: 'true' })
+            setCuenta({ campo: pro.ciudad, valido: 'true' })
             setModalEditar(true)
         }
 
 
         const insertar = async () => {
 
-            if (nombre.valido === 'true' && nit.valido === 'true' &&
-                telefono.valido === 'true' && enviado === 0 ) {
-                    setEnviado(1)
+            if (nombre.valido === 'true' &&
+                telefono.valido === 'true' && enviado === 0) {
+                setEnviado(1)
                 axios.post(URL + '/proveedor/insertar',
                     {
                         nombre: nombre.campo,
-                        nit: nit.campo,
+                        nit: nit.campo ? nit.campo : '00000',
                         telefono: telefono.campo,
-                        direccion: direccion.valido==='true'?direccion.campo:'SIN ESPECIFICAR',
-                        ciudad: ciudad.valido ==='true'? ciudad.campo:'SIN ESPECIFICAR',
+                        direccion: direccion.campo ? direccion.campo : 'SIN ESPECIFICAR',
+                        pais: pais.campo ? pais.campo : 'SIN ESPECIFICAR',
+                        cuenta: cuenta.campo ? cuenta.campo : 'SIN ESPECIFICAR',
                         creado: fechaHora
 
                     }).then(json => {
@@ -131,24 +134,25 @@ function Proveedor() {
                             toast.success(json.data.msg)
                             vaciarDatos()
                             setModalInsertar(false)
-                        } else {toast.error(json.data.msg);setEnviado(0)}
+                        } else { toast.error(json.data.msg); setEnviado(0) }
                     })
-            } else toast.error('Completar todos los campos de l formulario')
+            } else toast.error('Completar todos los campos del formulario')
         }
 
         const update = async () => {
 
             if (id.valido === 'true' &&
-                nombre.valido === 'true' && nit.valido === 'true' &&
-                telefono.valido === 'true'  ) {
+                nombre.valido === 'true' &&
+                telefono.valido === 'true') {
                 axios.post(URL + '/proveedor/actualizar',
                     {
                         id: id.campo,
                         nombre: nombre.campo,
-                        nit: nit.campo,
+                        nit: nit.campo ? nit.campo : '00000',
                         telefono: telefono.campo,
-                        direccion: direccion.valido==='true'?direccion.campo:'SIN ESPECIFICAR',
-                        ciudad: ciudad.valido ==='true'? ciudad.campo:'SIN ESPECIFICAR',
+                        direccion: direccion.campo ? direccion.campo : 'SIN ESPECIFICAR',
+                        pais: pais.campo ? pais.campo : 'SIN ESPECIFICAR',
+                        cuenta: cuenta.campo ? cuenta.campo : 'SIN ESPECIFICAR',
                         modificado: fechaHora
 
                     }).then(json => {
@@ -282,7 +286,7 @@ function Proveedor() {
                                                 <Button className="btn-nuevo col-auto" onClick={() => { seteliminado(false); listarProveedor(); setInputBuscar({ campo: null, valido: null }) }} >
                                                     <FontAwesomeIcon className='btn-icon-nuevo' icon={faArrowAltCircleLeft}></FontAwesomeIcon>Regresar
                                                 </Button>
-                                            } 
+                                            }
 
                                         </div>
                                         <div className='contenedor'>
@@ -363,12 +367,12 @@ function Proveedor() {
                                             Registrar nuevo Proveedor
                                         </div>
                                         <ModalBody>
+
                                             <div className='row'>
                                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12 mb-3">
                                                     <ComponenteInputUser
                                                         estado={nombre}
                                                         cambiarEstado={setNombre}
-                                                        name="nombre"
                                                         placeholder="Proveedor"
                                                         ExpresionRegular={INPUT.INPUT_BUSCAR}  //expresion regular
                                                         etiqueta='Nombre'
@@ -379,18 +383,17 @@ function Proveedor() {
                                                     <ComponenteInputUser
                                                         estado={nit}
                                                         cambiarEstado={setNit}
-                                                        name="nit"
                                                         placeholder="Nit"
-                                                        ExpresionRegular={INPUT.NIT}  //expresion regular
+                                                        ExpresionRegular={INPUT.INPUT_BUSCAR}  //expresion regular
                                                         etiqueta='NIT'
                                                         msg={'Escriba una el nit'}
+                                                        important={false}
                                                     />
                                                 </div>
                                                 < div className="col-12 col-sm-6 col-md-6 col-lg-6 ">
                                                     <ComponenteInputUser
                                                         estado={telefono}
                                                         cambiarEstado={setTelefono}
-                                                        name="telefono"
                                                         placeholder="Telefono"
                                                         ExpresionRegular={INPUT.TELEFONO}  //expresion regular
                                                         etiqueta='Telefono/cel.'
@@ -401,24 +404,33 @@ function Proveedor() {
                                                     <ComponenteInputUser
                                                         estado={direccion}
                                                         cambiarEstado={setDireccion}
-                                                        name="direccion"
                                                         placeholder="Direccion"
                                                         ExpresionRegular={INPUT.DIRECCION}  //expresion regular
                                                         etiqueta='Direccion'
                                                         msg={'Este campo admite letras, numeros y caracteres'}
-                                                        important = {false}
+                                                        important={false}
                                                     />
                                                 </div>
                                                 < div className="col-12 col-sm-6 col-md-6 col-lg-6">
                                                     <ComponenteInputUser
-                                                        estado={ciudad}
-                                                        cambiarEstado={setCiudad}
-                                                        name="ciudad"
-                                                        placeholder="CIUDAD"
+                                                        estado={pais}
+                                                        cambiarEstado={setPais}
+                                                        placeholder="CIudad"
                                                         ExpresionRegular={INPUT.NOMBRE_PERSONA}  //expresion regular
                                                         etiqueta='Ciudad'
                                                         msg={'Este campo solo admite letras'}
-                                                        important = {false}
+                                                        important={false}
+                                                    />
+                                                </div>
+                                                < div className="col-12 col-sm-6 col-md-6 col-lg-6 ">
+                                                    <ComponenteInputUser
+                                                        estado={cuenta}
+                                                        cambiarEstado={setCuenta}
+                                                        placeholder="Cuenta "
+                                                        ExpresionRegular={INPUT.CUENTA}  //expresion regular
+                                                        etiqueta='Cuenta Bancaria'
+                                                        msg={'Este campo solo admite números'}
+                                                        important={false}
                                                     />
                                                 </div>
                                             </div>
@@ -444,7 +456,6 @@ function Proveedor() {
                                                     <ComponenteInputUser
                                                         estado={nombre}
                                                         cambiarEstado={setNombre}
-                                                        name="nombre"
                                                         placeholder="Proveedor"
                                                         ExpresionRegular={INPUT.INPUT_BUSCAR}  //expresion regular
                                                         etiqueta='Nombre'
@@ -455,18 +466,17 @@ function Proveedor() {
                                                     <ComponenteInputUser
                                                         estado={nit}
                                                         cambiarEstado={setNit}
-                                                        name="nit"
                                                         placeholder="Nit"
-                                                        ExpresionRegular={INPUT.NIT}  //expresion regular
+                                                        ExpresionRegular={INPUT.INPUT_BUSCAR}  //expresion regular
                                                         etiqueta='NIT'
                                                         msg={'Escriba una el nit'}
+                                                        important={false}
                                                     />
                                                 </div>
                                                 < div className="col-12 col-sm-6 col-md-6 col-lg-6 ">
                                                     <ComponenteInputUser
                                                         estado={telefono}
                                                         cambiarEstado={setTelefono}
-                                                        name="telefono"
                                                         placeholder="Telefono"
                                                         ExpresionRegular={INPUT.TELEFONO}  //expresion regular
                                                         etiqueta='Telefono/cel.'
@@ -477,27 +487,38 @@ function Proveedor() {
                                                     <ComponenteInputUser
                                                         estado={direccion}
                                                         cambiarEstado={setDireccion}
-                                                        name="direccion"
                                                         placeholder="Direccion"
                                                         ExpresionRegular={INPUT.DIRECCION}  //expresion regular
                                                         etiqueta='Direccion'
                                                         msg={'Este campo admite letras, numeros y caracteres'}
+                                                        important={false}
                                                     />
                                                 </div>
                                                 < div className="col-12 col-sm-6 col-md-6 col-lg-6">
                                                     <ComponenteInputUser
-                                                        estado={ciudad}
-                                                        cambiarEstado={setCiudad}
-                                                        name="ciudad"
-                                                        placeholder="ciudad"
+                                                        estado={pais}
+                                                        cambiarEstado={setPais}
+                                                        placeholder="Ciudad"
                                                         ExpresionRegular={INPUT.NOMBRE_PERSONA}  //expresion regular
                                                         etiqueta='Ciudad'
                                                         msg={'Este campo solo admite letras'}
+                                                        important={false}
+                                                    />
+                                                </div>
+                                                < div className="col-12 col-sm-6 col-md-6 col-lg-6 ">
+                                                    <ComponenteInputUser
+                                                        estado={cuenta}
+                                                        cambiarEstado={setCuenta}
+                                                        placeholder="Cuenta "
+                                                        ExpresionRegular={INPUT.CUENTA}  //expresion regular
+                                                        etiqueta='Cuenta Bancaria'
+                                                        msg={'Este campo solo admite números'}
+                                                        important={false}
                                                     />
                                                 </div>
                                             </div>
                                         </ModalBody>
-                                  
+
 
                                         <div className="row botonModal">
                                             <Button className="btn-restaurar col-auto" onClick={() => { setModalEditar(false); vaciarDatos() }}  >
@@ -511,8 +532,8 @@ function Proveedor() {
 
                                 </div>
 
-                                <div className='footer-pague'> ©EMPRESA CONSTRUCTORA BSCH  <Link className='ml-3' to={'#'} onClick={()=>{window.location.href ='https://wa.me/59171166513'}}> 
-                                <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
+                                <div className='footer-pague'> ©EMPRESA CONSTRUCTORA BSCH  <Link className='ml-3' to={'#'} onClick={() => { window.location.href = 'https://wa.me/59171166513' }}>
+                                    <span className='spam-footer'> Desarrollador: Gustavo Aguilar Torres</span></Link> </div>
                             </div>
                         </div>
                     </div >

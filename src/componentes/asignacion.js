@@ -12,7 +12,7 @@ import { URL, INPUT } from '../Auth/config';
 import axios from 'axios';
 import Home from './elementos/home'
 import { Toaster, toast } from 'react-hot-toast'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 function Asignacion() {
@@ -133,6 +133,7 @@ function Asignacion() {
 
 
         const rellenar = (s) => {
+            listarProyecto()
             setId({ campo: s.id, valido: 'true' })
             setIdProyecto({ campo: s.idproyecto, valido: 'true' })
             setFecha({ campo: s.fecha, valido: 'true' })
@@ -178,7 +179,7 @@ function Asignacion() {
                         toast.success(json.data.msg)
                         listarAsignacion()
                     }
-                    else{toast.error(json.data.msg);setEnviado(0)}
+                    else { toast.error(json.data.msg); setEnviado(0) }
                 })
             } else {
                 toast.error('Complete los campos')
@@ -266,7 +267,6 @@ function Asignacion() {
                 axios.post(dir, { id: usuarioLocal, dato: inputBuscar.campo }).then(json => {
                     if (json.data.ok) {
                         setLista(json.data.data)
-
                     }
                     else toast.error(json.data.msg)
                 })
@@ -420,6 +420,7 @@ function Asignacion() {
 
 
 
+
         return (
             <div>
                 <div className="hold-transition sidebar-mini" >
@@ -438,9 +439,15 @@ function Asignacion() {
 
                                                 <div className='row '>
                                                     {eliminado === false &&
+                                                        <>                                                        
                                                         <Button className="btn-nuevo col-auto" onClick={() => { setModalInsertar(true); listarProyecto() }} >
                                                             <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>Nueva Asignación
                                                         </Button>
+                                                        <Button className="btn-restaurar col-auto"  onClick={()=>window.location.href = 'asignacion-usuario'}>
+                                                            <FontAwesomeIcon className='btn-icon-eliminar' icon={faWindowClose}></FontAwesomeIcon>Cerrar Ventana
+                                                        </Button>
+                                                        </>
+
                                                     }
 
                                                     {eliminado === true &&
@@ -487,12 +494,12 @@ function Asignacion() {
                                                                     <td className="col-1">{s.monto}</td>
                                                                     {
                                                                         listaTipo.map((e) => (
-                                                                            e.id === s.tipo && <td className="col-1">{e.nombre}</td>
+                                                                            e.id === s.tipo && <td className="col-1" key={e.id}>{e.nombre}</td>
                                                                         ))
                                                                     }
                                                                     {
                                                                         listaEstado.map((e) => (
-                                                                            e.id === s.estado && <td className="col-1">{e.nombre}</td>
+                                                                            e.id === s.estado && <td className="col-1" key={e.id}>{e.nombre}</td>
                                                                         ))
                                                                     }
                                                                     <td className="col-1 largTable">
@@ -543,7 +550,7 @@ function Asignacion() {
                                                         <p className='titleDetalle'>{'MONTO ASIGNADO  : ' + nombreVentanaMOnto + '  Bs.'}</p>
 
                                                         {
-                                                            montoGastado < nombreVentanaMOnto ?
+                                                            montoGastado <= nombreVentanaMOnto ?
 
                                                                 <p className='textoDetalle'>{montoGastado ? 'MONTO GASTADO : ' + montoGastado + ' Bs.' : 'MONTO GASTADO : 0 Bs.'}</p> :
                                                                 <p className='textoDetalle'>{montoGastado ? 'MONTO GASTADO : ' + montoGastado + ' Bs.' : 'MONTO GASTADO : 0 Bs.'}
@@ -558,7 +565,7 @@ function Asignacion() {
                                             </div>
                                             <div className='contenedor-cabecera'>
                                                 <div className='row '>
-                                                    <div class="container-4 col-auto " style={{ paddingTop: '5px', marginTop: '0px' }}>
+                                                    {/* <div class="container-4 col-auto " style={{ paddingTop: '5px', marginTop: '0px' }}>
                                                         <ComponenteInputBuscar_
                                                             estado={inputBuscar_}
                                                             cambiarEstado={setInputBuscar_}
@@ -569,7 +576,7 @@ function Asignacion() {
                                                             // evento2 = {b}
                                                             etiqueta={'Buscar'}
                                                         />
-                                                    </div>
+                                                    </div> */}
                                                     <Button className="btn-restaurar col-auto" onClick={() => { setVentana(1); listarAsignacion() }}> <FontAwesomeIcon className='btn-icon-eliminar' icon={faWindowClose}></FontAwesomeIcon>Cerrar ventana</Button>
                                                 </div>
                                             </div>
@@ -675,7 +682,7 @@ function Asignacion() {
                                                         {
                                                             listaTipo.map((e) => (
                                                                 gasto[0].tipopago === e.id &&
-                                                                <p className='textoDetalle'>{'TIPO PAGO : ' + e.nombre}</p>
+                                                                <p className='textoDetalle' key={e.id}>{'TIPO PAGO : ' + e.nombre}</p>
 
                                                             ))
 
@@ -903,7 +910,7 @@ function Asignacion() {
 
                                         <div className="row botonModal">
 
-                                            <Button className='btn-restaurar col-auto' onClick={() => setModalInsertar(false)} >
+                                            <Button className='btn-restaurar col-auto' onClick={() => { setModalInsertar(false); empty() }} >
                                                 <FontAwesomeIcon className='btn-icon-eliminar' icon={faWindowClose}></FontAwesomeIcon>Cerrar </Button>
 
                                             <Button className='btn-nuevo col-auto' onClick={() => insert()}>
@@ -994,7 +1001,7 @@ function Asignacion() {
                                             </div>
                                         </ModalBody>
                                         <div className="row botonModal">
-                                            <Button className='btn-restaurar col-auto' onClick={() => setModalEditar(false)}  >
+                                            <Button className='btn-restaurar col-auto' onClick={() => { setModalEditar(false); empty() }}  >
                                                 <FontAwesomeIcon className='btn-icon-eliminar' icon={faWindowClose}></FontAwesomeIcon>Cancelar </Button>
 
                                             <Button className='btn-nuevo col-auto' onClick={() => update()}>

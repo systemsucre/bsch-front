@@ -560,7 +560,7 @@ function Proyecto() {
                                                             cambiarEstado={setMontoContrato}
                                                             name="montocontrato"
                                                             placeholder="MONTO"
-                                                            ExpresionRegular={INPUT.NUMEROS}  //expresion regular
+                                                            ExpresionRegular={INPUT.NUMEROS_P}   //expresion regular
                                                             etiqueta='Monto contrato Bs.'
                                                             msg='Este campo es numérico'
 
@@ -584,7 +584,7 @@ function Proyecto() {
                                                             cambiarEstado={setMontoPagado}
                                                             name="montopagado"
                                                             placeholder="MONTO PAGADO"
-                                                            ExpresionRegular={INPUT.NUMEROS}  //expresion regular
+                                                            ExpresionRegular={INPUT.NUMEROS_P}  //expresion regular
                                                             etiqueta='Monto pagado Bs.'
                                                             msg='Este campo es numérico'
                                                         />
@@ -713,7 +713,7 @@ function Proyecto() {
                                                             cambiarEstado={setMontoContrato}
                                                             name="montocontrato"
                                                             placeholder="MONTO"
-                                                            ExpresionRegular={INPUT.NUMEROS}  //expresion regular
+                                                            ExpresionRegular={INPUT.NUMEROS_P}  //expresion regular
                                                             etiqueta='Monto contrato Bs.'
                                                             msg='Este campo es numérico'
 
@@ -737,7 +737,7 @@ function Proyecto() {
                                                             cambiarEstado={setMontoPagado}
                                                             name="montopagado"
                                                             placeholder="MONTO PAGADO"
-                                                            ExpresionRegular={INPUT.NUMEROS}  //expresion regular
+                                                            ExpresionRegular={INPUT.NUMEROS_P}  //expresion regular
                                                             etiqueta='Monto pagado Bs.'
                                                             msg='Este campo es numérico'
                                                         />

@@ -127,8 +127,8 @@ function Usuario() {
         const rellenar = async () => {
             listarRol()
             setId({ campo: usuario[0].id, valido: 'true' })
-            usuario[0].idRol ? setIdRol({ campo: usuario[0].idRol, valido: 'true' }): setIdRol({ campo: null, valido: null })
-            usuario[0].sueldo ? setSueldo({ campo: usuario[0].sueldo, valido: 'true' }): setIdRol({ campo: null, valido: null })
+            usuario[0].idRol ? setIdRol({ campo: usuario[0].idRol, valido: 'true' }) : setIdRol({ campo: null, valido: null })
+            usuario[0].sueldo ? setSueldo({ campo: usuario[0].sueldo, valido: 'true' }) : setIdRol({ campo: null, valido: null })
             setNombre({ campo: usuario[0].nombre, valido: 'true' })
             setApellidoPat({ campo: usuario[0].apellido1, valido: 'true' })
             setApellidoMat({ campo: usuario[0].apellido2, valido: 'true' })
@@ -273,7 +273,7 @@ function Usuario() {
                             setModalActualizar(false)
                         } else toast.error(json.data.msg)
                     })
-                }else toast.error('seleccione el rol e inserte el sueldo')
+                } else toast.error('seleccione el rol e inserte el sueldo')
             }
         }
 
@@ -345,7 +345,7 @@ function Usuario() {
                         setTelefono({ campo: null, valido: null })
                         setEnviado(0)
 
-                    } else {toast.error(json.data.msg);setEnviado(0)}
+                    } else { toast.error(json.data.msg); setEnviado(0) }
                 })
             } else toast.error('Complete todos los campos requeridos en el formulario')
         }
@@ -446,32 +446,30 @@ function Usuario() {
                                                     <tbody>
 
                                                         {lista.map((u) => (
-                                                            <>
-                                                                {u.validar === 1 ?
-                                                                    <tr key={u.id} className='item' onClick={() => {
+                                                            u.validar === 1 ?
+                                                                <tr key={u.id} className='item' onClick={() => {
 
-                                                                        localStorage.setItem('empleado', u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2);
-                                                                        localStorage.setItem('idEmpleado', u.id); verUsuario(u.id)
-                                                                    }}>
+                                                                    localStorage.setItem('empleado', u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2);
+                                                                    localStorage.setItem('idEmpleado', u.id); verUsuario(u.id)
+                                                                }}>
 
-                                                                        <td className="col-1 ">{u.ci}</td>
-                                                                        <td className="col-2 ">{u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2}</td>
+                                                                    <td className="col-1 ">{u.ci}</td>
+                                                                    <td className="col-2 ">{u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2}</td>
 
-                                                                        <td className="col-1  ">{u.username}</td>
-                                                                        <td className="col-1  ">{u.celular}</td>
+                                                                    <td className="col-1  ">{u.username}</td>
+                                                                    <td className="col-1  ">{u.celular}</td>
 
 
-                                                                    </tr> :
-                                                                    <tr key={u.id} className='item' style={{ background: '#F0E8E6' }} onClick={() => verUsuario(u.id)}>
+                                                                </tr> :
+                                                                <tr key={u.id} className='item' style={{ background: '#F0E8E6' }} onClick={() => verUsuario(u.id)}>
 
-                                                                        <td className="col-1 ">{u.ci}</td>
-                                                                        <td className="col-2 ">{u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2}</td>
+                                                                    <td className="col-1 ">{u.ci}</td>
+                                                                    <td className="col-2 ">{u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2}</td>
 
-                                                                        <td className="col-1  ">{u.username}</td>
-                                                                        <td className="col-1  ">{u.celular}</td>
+                                                                    <td className="col-1  ">{u.username}</td>
+                                                                    <td className="col-1  ">{u.celular}</td>
 
-                                                                    </tr>}
-                                                            </>
+                                                                </tr>
                                                         ))}
 
                                                     </tbody>
